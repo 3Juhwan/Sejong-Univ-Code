@@ -1,0 +1,14 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int main() {
+	char ch[20], * p;
+	
+	for(p = ch;*(p-1)!='#';p++)	
+		scanf("%c", p);
+
+	for (p = p - 2;p >= ch;p--)
+		printf("%c", *p);
+
+	return 0;
+}

@@ -1,0 +1,28 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int main() {
+	char ch[10], *p, * max_index = ch;
+	int cnt = 0, max_num = 0;
+
+	for (p = ch;p < ch + 10;p++)
+		scanf("%c", p);
+
+	for (p = ch;p < ch + 10;p++) {
+
+		for (int i = 0;i < 10;i++) 
+			if (*p == *(p + i))
+				cnt++;
+
+		if (cnt > max_num) {
+			max_num = cnt;
+			max_index = p;		//빈도수 최대인 값의 index 저장
+		}
+
+		cnt = 0;
+	}
+
+	printf("%c %d", *max_index, max_num);
+
+	return 0;
+}

@@ -1,0 +1,24 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int* mid(int arr[]);
+
+int main() {
+	int x[3], *p;
+
+	for (p = x; p < x + 3;p++)
+		scanf("%d", p);
+
+	printf("%d", *(mid(x)));
+
+	return 0;
+}
+
+int* mid(int x[]) {
+	if ((*x > * (x + 1)) + (*x > * (x + 2)) == 1 )	
+		return x;
+	else if ((*(x + 1) > * x) + (*(x + 1) > * (x + 2)) == 1 || *(x + 1) == *x)	// 입력값 같을 때도 처리함
+		return x + 1;
+	else if ((*(x + 2) > * x) + (*(x + 2) > * (x + 1)) == 1 || *(x + 2) == *(x + 1) || *(x + 2) == *x)	// 입력값 같을 때도 처리함
+		return x + 2;
+}

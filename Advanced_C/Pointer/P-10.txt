@@ -1,0 +1,26 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+void gcdlcm(int x, int y, int * a,int*b);
+
+int main() {
+	int x, y;
+
+	scanf("%d %d", &x, &y);
+
+	gcdlcm(x, y, &x, &y);
+
+	printf("%d %d", x, y);
+
+	return 0;
+}
+
+void gcdlcm(int x, int y, int* a, int* b) {
+	int  i = x > y ? y : x;
+
+	for (;x % i != 0 || y % i != 0; i--)
+		;
+
+	*a = i;
+	*b = x * y / i;
+}

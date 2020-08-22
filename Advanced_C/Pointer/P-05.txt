@@ -1,0 +1,23 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int main() {
+	int rank[5], * p, tmp;
+
+	for (p = rank;p < rank + 5;p++)
+		scanf("%d", p);
+
+	p = rank;	//p를 index 0으로 초기화
+
+	for (int i = 0; i < 5;i++) {
+		tmp = 1;
+
+		for (int j = 0; j < 5;j++) 
+			if (*(p+i) < *(p + j))
+				tmp++;
+		
+		printf("%d=r%d ", *(p+i), tmp);
+	}
+
+	return 0;
+}

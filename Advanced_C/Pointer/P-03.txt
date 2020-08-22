@@ -1,0 +1,19 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int main() {
+	int ar[50] = { 0 }, N, cnt = 0;
+	int* p;
+
+	scanf("%d", &N);
+
+	for (p = ar; p < ar + N; p++)	//반복문으로 배열 훑어보기
+		scanf("%d", p);
+
+	for (p = ar;*p != 0;p++, cnt++)	
+		;
+
+	printf("%d", cnt);
+
+	return 0;
+}
