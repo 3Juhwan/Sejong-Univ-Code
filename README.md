@@ -4,3 +4,11 @@
 ## 교과명
 #### Advanced_C
 #### : 고급C
+
+## 표기
+#### P
+#### : Practice Problem
+#### T
+#### : Training Problem
+#### 숫자 뒤 알파벳
+#### : 다른 풀이
