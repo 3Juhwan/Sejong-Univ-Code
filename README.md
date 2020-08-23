@@ -2,9 +2,7 @@
 세종대학교 프로그래밍 수업 코드 저장소
 
 ## 교과명
-#### Advanced_C
-#### <color=gray> : 고급C
-#### <color="gray"> : 고급C
+#### Advanced_C : 고급C
 
 ## 표기
 #### P
