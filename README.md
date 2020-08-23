@@ -3,7 +3,8 @@
 
 ## 교과명
 #### Advanced_C
-#### : 고급C
+#### <color=gray> : 고급C
+#### <color="gray"> : 고급C
 
 ## 표기
 #### P
