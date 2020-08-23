@@ -1,0 +1,26 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int arrsum(int* start, int* last);
+
+int main() {
+	int N = 0, S = 0, E = 0, arr[100];
+
+	scanf("%d %d %d", &N, &S, &E);
+
+	for (int* p = arr; p < arr + N;p++)
+		scanf("%d", p);
+
+	printf("%d", arrsum(arr + S, arr + E));
+
+	return 0;
+}
+
+int arrsum(int* start, int* last) {
+	int sum = 0;
+
+	for (int *p = start;p <= last;p++)
+		sum += *p;
+
+	return sum;
+}

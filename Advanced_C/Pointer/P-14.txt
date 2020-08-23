@@ -1,0 +1,30 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int add_to_k(int* x, int* y);
+
+int main() {
+	int N = 0, d[100], sum = 0;
+	int* p;
+
+	scanf("%d", &N);
+
+	for (p = d;p < d + N;p++)
+		scanf("%d", p);
+	
+	for (int i = 0; i < N;i++)
+		sum += add_to_k(d, d + i);
+
+	printf("%d", sum);
+	
+	return 0;
+}
+
+int add_to_k(int* x, int* y) {
+	int sum = 0;
+
+	for (int* p = x; p <= y;p++)
+		sum += *p;
+
+	return sum;
+}

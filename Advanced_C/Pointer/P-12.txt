@@ -1,0 +1,28 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+void addArray(int* x, int* y, int* z, int n);
+
+int main() {
+	int n, x[20], y[20], z[20], *p;
+
+	scanf("%d", &n);
+	
+	for (p = x; p < x + n; p++)
+		scanf("%d", p);
+
+	for (p = y; p < y + n; p++)
+		scanf("%d", p);
+
+	addArray(x, y, z, n);
+
+	for (p = z; p < z + n; p++)
+		printf(" %d", *p);
+
+	return 0;
+}
+
+void addArray(int* x, int* y, int* z, int n) {
+	for (int i = 0;i < n;i++)
+		*(z + i) = *(x + i) + *(y + n - i - 1);
+}
