@@ -1,0 +1,22 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int main() {
+	char str[202];
+	int len = 0;
+
+	scanf("%s", str);
+
+	// str 길이
+	for (;str[len];len++)
+		;
+
+	for (int i = len, j = 0; i < len * 2; i++, j++) {
+		str[i - 1] = str[j];
+		str[i] = '\0';
+		printf("%s\n", &str[j]);
+	}
+
+
+	return 0;
+}

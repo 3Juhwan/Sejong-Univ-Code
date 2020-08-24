@@ -1,0 +1,40 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int check_num_len(int x);
+
+int main() {
+	char eng_num1[9][9] = { "one","two","three","four","five","six","seven","eight","nine" };
+	char eng_unit[3][4] = { "TEN", "HUN","THO" };
+	int input = 0, len = 0, cnt_unit = 1, foreNum = 1;
+
+	scanf("%d", &input);
+
+	len = check_num_len(input);
+
+	// 숫자 크기만큼 100... 만듦
+	for (int i = len;i > 0;i--)cnt_unit *= 10;
+
+	for (int i = len;i > 0;i--) {
+		cnt_unit /= 10;
+		foreNum = (input / cnt_unit);
+		input %= cnt_unit;
+		
+		if(foreNum)
+			printf("%s ", eng_num1[foreNum - 1]);
+		if(i != 1 && foreNum)
+		printf("%s ", eng_unit[i - 2]);
+	}
+
+
+	return 0;
+}
+
+int check_num_len(int x) {
+	int cnt = 0;
+	while (x > 0) {
+		x /= 10;
+		cnt++;
+	}
+	return cnt;
+}

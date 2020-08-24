@@ -1,0 +1,28 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+	char str1[80], str2[10];
+	int len1 = 0, len2 = 0, cnt = 0;
+
+	scanf("%[^\n]s", str1);
+	getchar();
+	scanf("%s", str2);
+
+	len1 = strlen(str1);
+	len2 = strlen(str2);
+
+	for (int i = 0, j; i < len1 - len2 + 1;i++) {
+		for (j = 0; j < len2 && str1[i + j] == str2[j];j++)
+			;
+		if (j == len2) {
+			cnt++;
+			i += j - 1;
+		}
+	}
+
+	printf("%d ", cnt);
+
+	return 0;
+}

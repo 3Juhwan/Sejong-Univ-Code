@@ -1,0 +1,39 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int main() {
+	char str1[41], str2[21];
+	int num = 0, is_inverse = 0, len = 0, index = 0;
+
+	scanf("%s", str1);
+	scanf("%s", str2);
+	scanf("%d", &num);
+	scanf("%d", &is_inverse);
+
+	// str2의 길이
+	for (;str2[len];len++)
+		;
+
+	// str1의 마지막 NULL index
+	for (index = num;str1[index];index++)
+		;
+
+	// str1 swap
+	for (int i = index;i >= num;i--)
+		str1[i + len] = str1[i];
+
+	// str insert
+	if (!is_inverse)
+		for (int i = num, j = 0; i < len + num;i++, j++)
+			str1[i] = str2[j];
+	
+	// str insert
+	else
+		for (int i = num, j = len - 1; i < len + num;i++, j--)
+			str1[i] = str2[j];
+
+
+	printf("%s", str1);
+
+	return 0;
+}

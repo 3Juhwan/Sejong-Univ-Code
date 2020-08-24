@@ -1,0 +1,33 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+#include <string.h>
+
+int check(char* x);
+
+int main() {
+	char str[31];
+
+	scanf("%s", str);
+
+	printf("%d", check(str));
+
+	return 0;
+}
+
+int check(char* x) {
+	int num = 0, i = 0;
+
+	// 문자열 길이 체크
+	while (x[num++])
+		;
+
+	printf("%d ", --num);	// 위에서 길이가 +1 되서 -- 해줌
+
+	for (;i <= num / 2 && x[i] == x[num - i - 1];i++)
+		;
+
+	if (i - 1== num / 2)
+		return 1;
+	else
+		return 0;
+}
