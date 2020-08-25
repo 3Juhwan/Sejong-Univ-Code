@@ -1,0 +1,34 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+typedef struct Student {
+	char name[10];
+	int score;
+}Student;
+
+struct Student *select_min(struct Student *pstr);
+
+int main() {
+	Student student[5], *lowest_student;
+
+	for (int i = 0;i < 5;i++)
+		scanf("%s %d", &student[i].name, &student[i].score);
+
+	lowest_student = select_min(student);
+
+	printf("%s %d", lowest_student->name, lowest_student->score);
+
+	return 0;
+}
+
+struct Student* select_min(struct Student* pstr) {
+	Student* min_index = NULL;
+
+	for (int i = 0,min = 100; i < 5; i++) 
+		if (min > pstr[i].score) {
+			min = pstr[i].score;
+			min_index = &pstr[i];
+		}
+
+	return min_index;
+}

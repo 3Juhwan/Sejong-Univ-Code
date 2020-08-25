@@ -1,0 +1,30 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+typedef struct {
+	int highest_score;
+	int lowest_score;
+	char is_pass;	// 합격 여부
+	int dif_crit;	// 합격 기준 점수차
+	int dif_btw_HL;	//가장 높은 점수와 낮은 점수 차
+}result;
+
+void passorfail(result* pstr);
+
+int main() {
+	result info;
+
+	scanf("%d %d %d", &info.highest_score, &info.lowest_score, &info.dif_crit);
+	info.dif_btw_HL = info.highest_score - info.lowest_score;
+
+	passorfail(&info);
+
+	printf("%d %c", info.dif_btw_HL, info.is_pass);
+}
+
+void passorfail(result* pstr) {
+	if (pstr->dif_btw_HL <= pstr->dif_crit)
+		pstr->is_pass = 'P';
+	else
+		pstr->is_pass = 'F';
+}

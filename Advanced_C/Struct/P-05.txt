@@ -1,0 +1,36 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+typedef struct {
+	char name[20];
+	int score[3];
+	double avg;
+	char grade;
+}Student;
+
+int main() {
+	Student person[50], *p;
+	int N = 0;
+
+	scanf("%d", &N);
+
+	for (p = person;p < person + N;p++) {
+		scanf("%s %d %d %d", p->name, &p->score[0], &p->score[1], &p->score[2]);
+		p->avg = (p->score[0] + p->score[1] + p->score[2]) / 3.0;
+	}
+
+	for (p = person;p < person + N;p++) {
+		if (p->avg >= 90)
+			p->grade = 'A';
+		else if (p->avg >= 80)
+			p->grade = 'B';
+		else if (p->avg >= 70)
+			p->grade = 'C';
+		else
+			p->grade = 'F';
+
+		printf("%s %.1lf %c\n", p->name, p->avg, p->grade);
+	}
+
+	return 0;
+}

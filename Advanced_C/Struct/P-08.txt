@@ -1,0 +1,31 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+typedef struct complex{
+	double num1;	//실수부
+	double num2;	//허수부
+}complex;
+
+struct complex add(complex x, complex y);
+
+int main() {
+	complex A,B, output;
+
+	scanf("%lf %lf", &A.num1, &A.num2);
+	scanf("%lf %lf", &B.num1, &B.num2);
+
+	output = add(A, B);
+
+	printf("%.1lf + %.1lfi", output.num1, output.num2);
+
+	return 0;
+}
+
+struct complex add(complex x, complex y) {
+	complex A;
+
+	A.num1 = x.num1 + y.num1;
+	A.num2 = x.num2 + y.num2;
+
+	return A;
+}

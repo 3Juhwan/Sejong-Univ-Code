@@ -1,0 +1,115 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+// 다른 방법으로 풀어봤으나,,, 더 길고 복잡해졌다
+
+typedef struct {
+	int gender;
+	int weight;
+	int height;
+}Student;
+
+void rate_body(Student* pstr, int* x);
+int rate_height(Student* pstr);
+int rate_male_weight(Student* pstr);
+int rate_female_weight(Student * pstr);
+
+int main() {
+	Student info[10], *pstr;
+	int N, rank[3] = { 0 };
+
+	scanf("%d", &N);
+
+	for (int i = 0; i < N;i++) {
+		scanf("%d %d %d", &info[i].gender, &info[i].weight, &info[i].height);
+		rate_body(&info[i], rank);
+	}
+	for (int i = 0;i < 3;i++)
+		printf(" %d", rank[i]);
+}
+
+void rate_body(Student *pstr, int *x){
+	if (pstr->gender == 1) {
+		if (rate_height(pstr) == 1) {
+			if (rate_male_weight(pstr) == 1)
+				*x += 1;
+			else if (rate_male_weight(pstr) == 2)
+				*(x + 2) += 1;
+			else if (rate_male_weight(pstr) == 3)
+				*(x + 1) += 1;
+		}
+		else if (rate_height(pstr) == 2) {
+			if (rate_male_weight(pstr) == 2)
+				*x += 1;
+			else if (rate_male_weight(pstr) == 1)
+				*(x + 2) += 1;
+			else if (rate_male_weight(pstr) == 3)
+				*(x + 1) += 1;
+		}
+		else if (rate_height(pstr) == 3) {
+			if (rate_male_weight(pstr) == 3)
+				*x += 1;
+			else if (rate_male_weight(pstr) == 2)
+				*(x + 2) += 1;
+			else if (rate_male_weight(pstr) == 1)
+				*(x + 1) += 1;
+		}
+	}
+	else if (pstr->gender == 2) {
+		if (rate_height(pstr) == 1) {
+			if (rate_female_weight(pstr) == 1)
+				*x += 1;
+			else if (rate_female_weight(pstr) == 2)
+				*(x + 2) += 1;
+			else if (rate_female_weight(pstr) == 3)
+				*(x + 1) += 1;
+		}
+		else if (rate_height(pstr) == 2) {
+			if (rate_female_weight(pstr) == 2)
+				*x += 1;
+			else if (rate_female_weight(pstr) == 1)
+				*(x + 2) += 1;
+			else if (rate_female_weight(pstr) == 3)
+				*(x + 1) += 1;
+		}
+		else if (rate_height(pstr) == 3) {
+			if (rate_female_weight(pstr) == 3)
+				*x += 1;
+			else if (rate_female_weight(pstr) == 2)
+				*(x + 2) += 1;
+			else if (rate_female_weight(pstr) == 1)
+				*(x + 1) += 1;
+		}
+	}
+}
+
+int rate_height(Student *pstr) {
+	int H = pstr->height;
+
+	if (H < 165)
+		return 1;
+	else if (H >= 165 && H < 175)
+		return 2;
+	else
+		return 3;
+}
+
+int rate_male_weight(Student* pstr) {
+	int W = pstr->weight;
+
+	if (W < 60)
+		return 1;
+	else if (W >= 60 && W < 70)
+		return 2;
+	return 3;
+}
+
+int rate_female_weight(Student* pstr) {
+	int W = pstr->weight;
+
+	if (W < 50)
+		return 1;
+	else if (W >= 50 && W < 60)
+		return 2;
+	return 3;
+}

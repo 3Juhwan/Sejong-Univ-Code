@@ -1,0 +1,60 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+typedef struct {
+	char name[10];
+	int score1;
+	int score2;
+	int score3;
+	double avg;
+}Student;
+
+void read_data(Student* pstr);
+void cal_avg(Student* pstr);
+void sort(Student* pstr);
+void print_score(Student* pstr);
+
+int main() {
+	Student student[10];
+
+	read_data(student);
+	cal_avg(student);
+	sort(student);
+	print_score(student);
+
+	return 0;
+}
+
+void read_data(Student *pstr) {
+	for (int i = 0;i < 10;i++)
+		scanf("%s %d %d %d", &pstr[i].name, &pstr[i].score1, &pstr[i].score2, &pstr[i].score3);
+}
+
+void cal_avg(Student* pstr) {
+	for (int i = 0;i < 10;i++)
+		pstr[i].avg = (pstr[i].score1 + pstr[i].score2 + pstr[i].score3) / 3.0;
+}
+
+void sort(Student* pstr) {
+	Student tmp;
+
+	for (int i = 0;i < 10;i++) {
+		double max = 0;
+		for (int j = i;j < 10;j++) {
+			if (max < pstr[j].avg) {
+				max = pstr[j].avg;
+				tmp = pstr[j];
+				pstr[j] = pstr[i];
+				pstr[i] = tmp;
+			}
+		}
+	}
+}
+
+void print_score(Student* pstr) {
+	printf("%s %.2lf\n", pstr[0].name, pstr[0].avg);
+	printf("%s %.2lf\n", pstr[9].name, pstr[9].avg);
+	printf("%s %.2lf\n", pstr[7].name, pstr[7].avg);
+	printf("%s %.2lf\n", pstr[8].name, pstr[8].avg);
+	printf("%s %.2lf\n", pstr[9].name, pstr[9].avg);
+}

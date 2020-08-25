@@ -1,0 +1,36 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+typedef struct Date {
+	int year;
+	int month;
+	int day;
+}Date;
+
+struct Date* select_min(Date* x, Date* y);
+
+int main() {
+	Date date[2], *min;
+
+	scanf("%d/%d/%d", &date[0].year, &date[0].month, &date[0].day);
+	scanf("%d/%d/%d", &date[1].year, &date[1].month, &date[1].day);
+
+	min = select_min(&date[0], &date[1]);
+
+	printf("%d/%d/%d", min->year, min->month, min->day);
+
+	return 0;
+}
+
+struct Date* select_min(Date* x, Date* y) {
+	if (x->year != y->year) {
+		return x->year > y->year ? y : x;
+	}
+	else{		// 두 인자의 year이 같을 때
+		if (x->month != y->month)	
+			return x->month > y->month ? y : x;
+		else {		// 두 인자의 year와 month가 같을 때
+			return x->day >= y->day ? y : x;
+		}
+	}
+}

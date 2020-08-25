@@ -1,0 +1,30 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+typedef struct {
+	int hour;
+	int minute;
+	int second;
+}Time;
+
+void subtract_time(Time T1, Time T2);
+
+int main() {
+	Time T1, T2;
+
+	scanf("%d %d %d", &T1.hour, &T1.minute, &T1.second);
+	scanf("%d %d %d", &T2.hour, &T2.minute, &T2.second);
+
+	subtract_time(T1, T2);
+
+	return 0;
+}
+
+void subtract_time(Time T1, Time T2) {	
+	int cal_time = (T2.hour - T1.hour) * 60 * 60 + (T2.minute - T1.minute) * 60 + (T2.second - T1.second);
+	int cal_hour = cal_time / (60 * 60);
+	int cal_minute = cal_time % (60 * 60) / 60;
+	int cal_second = cal_time % 60;
+
+	printf("%d %d %d", cal_hour, cal_minute, cal_second);
+}

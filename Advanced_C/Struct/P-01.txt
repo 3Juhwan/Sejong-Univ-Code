@@ -1,0 +1,21 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+struct Vector{
+	int x1;
+	int x2;
+	int x3;
+};
+
+int main() {
+	struct Vector V1, V2;
+
+	scanf("%d %d %d", &V1.x1, &V1.x2, &V1.x3);
+	scanf("%d %d %d", &V2.x1, &V2.x2, &V2.x3);
+
+	struct Vector V3 = { V1.x1 * V2.x1,V1.x2 * V2.x2,V1.x3 * V2.x3 };
+
+	printf("%d %d %d\n%d", V3.x1, V3.x2, V3.x3, V3.x1 + V3.x2 + V3.x3);
+
+	return 0;
+}

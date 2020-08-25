@@ -1,0 +1,26 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+typedef struct {
+	char name[10];
+	int score;
+}Info;
+
+int main() {
+	Info person[5];
+	int sum = 0;
+	double avg;
+
+	for (int i = 0; i < 5;i++) {
+		scanf("%s %d", &person[i].name, &person[i].score);
+		sum += person[i].score;
+	}
+
+	avg = sum / 5.0;
+
+	for (int i = 0; i < 5;i++)
+		if (person[i].score <= avg)
+			printf("%s\n", person[i].name);
+
+	return 0;
+}
