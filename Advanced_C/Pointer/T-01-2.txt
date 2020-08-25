@@ -1,0 +1,52 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int* maxmin(int* ar);
+
+int main() {
+	int N = 0, arr[100], cnt = 0;
+	int *p, * ps = arr;
+	
+	scanf("%d", &N);
+	
+	for (p = arr; cnt != N; p++) {
+		scanf("%d", p);
+		if (*p == 0)
+			cnt++;
+	}
+
+	for (p = arr, cnt =0 ; cnt!=N; p++) {
+		if (*p == 0) {
+			printf("%d\n", *maxmin(ps));	// 이전에 초기화한 주소 sp
+			ps = p + 1;						// 다음 함수 인자를 p == 0인 주소의 다음 주소로 할당
+			cnt++;
+		}
+	}
+	
+	return 0;
+}
+
+int* maxmin(int* ar) {
+	int max = *ar, min = *ar, dif = 0, min_dif;
+	int *p, *pmin = ar;
+
+	for (p = ar; *p != 0;p++) {
+		if (max < *p)
+			max = *p;
+		if (min > * p)
+			min = *p;
+	}
+
+	dif = max - min;	// 최대 최소 차이
+	min_dif = (*ar - dif) > 0 ? (*ar - dif) : (dif - *ar);
+
+	for (p = ar;*p != 0;p++) {
+		int tmp = (dif - *p) > 0 ? (dif - *p) : (*p - dif);		// 배열 요소와 차이 사이의 차이
+		if (tmp < min_dif) {
+			min_dif = tmp;
+			pmin = p;
+		}
+	}
+
+	return pmin;
+}

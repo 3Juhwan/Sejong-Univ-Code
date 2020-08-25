@@ -1,0 +1,27 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	int N, sum =0;
+	int* p = NULL;
+
+	scanf("%d", &N);
+
+	p = (int*)malloc(N * sizeof(int));
+
+	if (p == NULL)
+		return -1;
+	
+	for (int i = 0; i < N;i++) {
+		scanf("%d", p + i);
+		sum += *(p + i);
+	}
+
+	printf("%d", sum);
+
+	if (p != NULL)
+		free(p);
+
+	return 0;
+}
