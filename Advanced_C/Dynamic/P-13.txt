@@ -1,0 +1,48 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+	int N = 0;
+	char** p = NULL;
+
+	scanf("%d", &N);					// input
+
+	p = (char**)malloc(N * sizeof(char*));
+
+	if (p == NULL)			//error
+		return -1;	
+
+	for (int i = 0; i < N;i++)
+		p[i] = (char*)malloc(101 * sizeof(char));
+
+	for (int i = 0; i < N;i++) {		// input
+		scanf("%s", p[i]);
+		getchar();
+	}
+
+	for (int i = 0;i < N;i++) {
+		char* tmp = p[i];			// swap을 위한 임시 포인터 변수
+
+		for (int j = i + 1;j < N;j++) {
+			int is = strcmp(p[i], p[j]);
+
+			if (is == 1) {
+				tmp = p[j];
+				p[j] = p[i];
+				p[i] = tmp;
+			}
+		}
+
+		printf("%s\n", p[i]);		// output
+	}
+
+	for (int i = 0;i < N;i++)		// free
+		free(p[i]);
+
+	if (p != NULL)
+		free(p);
+
+	return 0;
+}

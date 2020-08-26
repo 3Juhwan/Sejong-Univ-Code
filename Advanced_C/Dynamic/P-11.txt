@@ -1,0 +1,53 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+#include <stdlib.h>
+
+// 이렇게 하는 게 맞는 건가...? 문제 의도 파악이 안된당
+// 화나서 막 코드 짬
+
+int main() {
+	int** p = NULL, * tmp = NULL, cnt_free = 0;
+
+	p = (int**)malloc(6 * sizeof(int*));
+
+	if (p == NULL)			// error
+		return -1;
+
+	p[0] = (int*)malloc(5 * sizeof(int));
+
+	tmp = p[0];
+
+	for (int i = 0,j = 0;i != 20;i++) {			// 여기서 i는 입력을 카운트하는 용도
+		scanf("%d", tmp++);
+
+		if (tmp - 1 != NULL && *(tmp - 1) == -1) {
+			cnt_free = j;
+			break;
+		}
+
+		if ((i - 4) % 3 == 0 && i >= 4) {
+			j++;
+			p[j] = (int*)malloc(3 * sizeof(int));
+			tmp = p[j];
+		}
+	}
+
+	tmp = p[0];
+
+	for (int i = 0, j = 0;i != 20;i++) {			// 여기서 i는 입력을 카운트하는 용도
+		if (tmp != NULL)
+			printf(" %d", *tmp++);
+		if (tmp - 1 != NULL && *(tmp - 1) == -1)
+			break;
+		if ((i - 4) % 3 == 0 && i>=4) 
+			tmp = p[++j];
+	}
+
+	for (int i = 0; i < cnt_free; i++)
+		free(p[i]);
+
+	if (p != NULL)
+		free(p);
+
+	return 0;
+}

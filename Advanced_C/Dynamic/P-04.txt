@@ -1,0 +1,41 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+	int column = 0, row = 0;
+	char** p = NULL;
+
+	scanf("%d %d", &row, &column);
+
+	p = (char**)malloc(column * sizeof(char*));
+
+	for (int i = 0;i < column;i++)
+		p[i] = (char*)malloc(row * sizeof(char));
+
+	if (p == NULL)		// error
+		return -1;
+
+	for (int i = 0, tmp = 'a';i < column;i++) 
+		for (int j = 0; j < row;j++) {
+			p[i][j] = tmp++;
+			if (tmp == 'z' + 1)
+				tmp = 'A';
+			else if (tmp == 'Z' + 1)
+				tmp = 'a';
+		}
+
+	for (int i = 0;i < column;i++) {
+		for (int j = 0; j < row;j++)
+			printf("%c ", p[i][j]);
+		printf("\n");
+	}
+
+	for (int i = 0;i < column;i++)
+		free(p[i]);
+
+	if(p != NULL)
+		free(p);
+
+	return 0;
+}

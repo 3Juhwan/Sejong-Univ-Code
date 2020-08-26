@@ -1,0 +1,41 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// p[i] -> p + i  [error]
+
+int main() {
+	int N = 0, cnt = 0, min = 101;
+	char **p = NULL, *pmin = NULL;
+
+	scanf("%d", &N);
+	getchar();
+
+	p = (char**)malloc(N * sizeof(char*))	;
+
+	if (p == NULL)		//error
+		return -1;
+
+	for (int i = 0;i < N;i++)
+		p[i] = (char*)malloc(101 * sizeof(char));
+
+	for (int i = 0; i < N;i++) {	// input
+		scanf("%[^\n]s", p + i);
+		getchar();
+
+		int len = strlen(p + i);
+		
+		if (len < min) {
+			min = strlen(p + i);
+			pmin = p + i;
+		}
+	}
+
+	printf("%s", pmin);		//output
+
+	if (p != NULL)		//free
+		free(p);
+
+	return 0;
+}
