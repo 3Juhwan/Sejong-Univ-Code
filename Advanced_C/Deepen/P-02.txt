@@ -1,0 +1,22 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int factorial(int n);
+
+int main() {
+	double sum = 1.0;
+	int  n = 0;
+	scanf("%d", &n);
+
+	for (int i = 1; i <= n;i++)
+		sum += 1.0 / factorial(i);
+
+	printf("%lf", sum);
+
+	return 0;
+}
+
+int factorial(int n) {
+	if (n == 1)return 1;
+	else return n * factorial((n - 1));
+}

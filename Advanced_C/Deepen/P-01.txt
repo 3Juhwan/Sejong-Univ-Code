@@ -1,0 +1,17 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int big(int x, int y);
+
+int main() {
+	int a = 0, b = 0;
+	scanf("%d %d", &a, &b);
+	printf("%d", big(a, b));
+
+	return 0;
+}
+
+int big(int x, int y) { 
+	if (y == 0) return x; 
+	else return big(y, x % y); 
+}

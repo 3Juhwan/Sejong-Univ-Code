@@ -1,0 +1,23 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+void pswap(int** ppx, int** ppy);
+
+int main() {
+	int x = 0, y = 0;
+	int* px = &x, * py = &y;
+
+	scanf("%d %d", &x, &y);
+
+	pswap(&px, &py);
+
+	printf("%d %d", *px, *py);
+
+	return;
+}
+
+void pswap(int** ppx, int** ppy) {
+	int* px = *ppx;
+	*ppx = *ppy;
+	*ppy = px;
+}
