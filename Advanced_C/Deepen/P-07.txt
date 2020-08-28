@@ -1,0 +1,25 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+void add(int x, int y);
+
+int main() {
+	int A = 0, x = 0, y = 0;
+	void* p = NULL;
+	void (*fp)(int, int);
+
+	scanf("%d", &A);
+	scanf("%d %d", &x, &y);
+	
+	p = &A;
+	fp = add;
+	
+	printf("%d\n", *(int*)p);
+	fp(x, y);
+
+	return 0;
+}
+
+void add(int x, int y) {
+	printf("%d", x + y);
+}

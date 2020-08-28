@@ -1,0 +1,61 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+void input(char* p, int N);
+void upper(char* p, int N);
+void lower(char* p, int N);
+void DOUBLE(char* p, int N);
+
+int main() {
+	int N = 0;
+	char arr[21], * i = NULL;
+
+	scanf("%d", &N);
+	getchar();
+
+	input(arr, N);
+
+	upper(arr, N);
+
+	lower(arr, N);
+
+	DOUBLE(arr, N);
+
+	return 0;
+}
+
+void input(char* p, int N) {
+	char* i = NULL;
+
+	for (i = p; i < p + N; i++)
+		scanf("%c", i);
+	getchar();
+}
+
+void upper(char* p, int N) {
+	char* i = NULL;
+
+	for (i = p; i < p + N; i++)
+		if (*i >= 'A' && *i <= 'Z')
+			printf("%c", *i);
+	printf("\n");
+}
+
+void lower(char* p, int N) {
+	char* i = NULL;
+
+	for (i = p; i < p + N; i++)
+		if (*i >= 'a' && *i <= 'z')
+			printf("%c", *i);
+	printf("\n");
+}
+
+void DOUBLE(char* p, int N) {
+	int sum = 0;
+	char* i = NULL;
+
+	for (i = p; i < p + N; i++)
+		if (*i >= '0' && *i <= '9')
+			sum = sum * 10 + (*i - '0');
+	printf("%d", 2 * sum);
+}

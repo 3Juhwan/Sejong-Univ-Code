@@ -1,0 +1,41 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+int main() {
+	int arr[6] = { 0, }, is_same[3] = { 0, };	// is_same is array that saves the same number
+	int* p = NULL, *q = NULL, *tmp = NULL;
+
+	for (p = arr;p < arr + 6;p++)
+		scanf("%d", p);
+
+	for (p = arr;p < arr + 6;p++) {
+		int cnt = 0;
+		for (q = p + 1;q < arr + 6; q++) {		// index warning!!
+			if (*p == *q) {						// if *p and *q is same, Search *p in is_same.
+				for (tmp = is_same; tmp < is_same + 3 && *tmp != *p;tmp++)	// Seach *p in is_same
+					;
+				if (tmp == (is_same + 3))		// If *p not in is_same, Count!!
+					cnt++;	
+				else
+					break;
+			}
+		}
+		if (cnt) {
+			printf("%d %d\n", *p, cnt + 1);
+
+			for (tmp = is_same; tmp < is_same + 3 ;tmp++)	// Insert *p in is_same to avoid repeat
+				if (!*tmp) {
+					*tmp = *p;
+					break;
+				}
+		}
+	}
+
+	// When everything is not same
+	for (tmp = is_same; tmp < is_same + 3 && !(*tmp);tmp++)
+		;
+	if (tmp == (is_same + 3))
+		printf("0");
+
+	return 0;
+}
