@@ -1,6 +1,6 @@
 #pragma warning (disable:4996)
 #include <stdio.h>
-
+// git add command test code
 int main() {
 	int x, y, z;
 	int* px = &x, * py = &y, * pz=&z, * tmp; 
