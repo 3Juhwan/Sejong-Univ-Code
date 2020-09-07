@@ -1,0 +1,45 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+	char name[10];
+	char id[11];
+	char grade;
+}Student;
+
+int main() {
+	Student s[5], * p = NULL;
+	char input[10];
+	int index = 0,cnt = 0;
+
+	for (int i = 0; i < 5; i++)
+		scanf("%s %s %c", &s[i].name, &s[i].id, &s[i].grade);
+	getchar();
+
+	scanf("%s", input);
+
+	for (int i = 0; i < 5; i++)
+		if (!strcmp(input, s[i].name) && strlen(input) == strlen(s[i].name)) {		// When names are exactly same
+			p = &s[i];
+			index = i;
+		}
+
+	for (int i = 0, j = 0; i < 5; i++) {
+		if (i == index)continue;
+
+		if (p->grade == s[i].grade) {
+			for (j = 0; j < 4 && p->id[j] == s[i].id[j]; j++)
+				;
+
+			if (j == 4) {
+				printf(" %s\n", s[i].name);
+				cnt++;
+			}
+		}
+	}
+
+	if (!cnt) printf("0");
+
+	return 0;
+}
