@@ -5,7 +5,7 @@ void print_word(char* p, char q[]);
 
 int main() {
 	char arr[1000];
-	char* p = arr, * q = NULL;
+	char* p = arr;
 
 	while ((*(p - 1) != '!' && *(p - 1) != '.' && *(p - 1) != '?') || p == arr)
 	{
@@ -25,10 +25,11 @@ int main() {
 void print_word(char* p, char q[]) {
 	char* bump = p;
 
-	while (p != q - 1) {
+	while (p != q - 1)
+	{
 		bump = p - 1;
 
-		while (*bump != ' ' && bump != q - 1)
+		while (*bump != ' ' && bump != q - 1)       // 앞 공백의 주소로 bump 포인터 이동
 		{
 			bump--;
 		}
@@ -43,7 +44,7 @@ void print_word(char* p, char q[]) {
 			printf(" ");
 		}
 
-		p = bump;
+		p = bump;       // 앞 공백의 주소로 p 포인터 이동
 
 	}
 
