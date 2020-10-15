@@ -1,30 +1,27 @@
 #pragma warning (disable:4996)
 #include <stdio.h>
 
-void addArray(int x[], int y[], int z[], int N);
+void addArray(int a[], int b[], int c[], int N);
 
 int main() {
-	int x[20] = { 0, }, y[20] = { 0, }, z[20] = { 0, }, N = 0;
-	int* p = NULL;
+	int a[20] = { 0, }, b[20] = { 0, }, c[20] = { 0, };
+	int N = 0, * p = NULL;
 
 	scanf("%d", &N);
-
-	for (p = x; p < x + N;p++)
+	for (p = a;p < a + N;p++)
 		scanf("%d", p);
-	for (p = y; p < y + N;p++)
+	for (p = b;p < b + N;p++)
 		scanf("%d", p);
 
-	addArray(x, y, z, N);
+	addArray(a, b, c, N);
 
-	for (p = z; p < z + N;p++)
+	for (p = c; p < c + N; p++)
 		printf(" %d", *p);
 
 	return 0;
 }
 
-void addArray(int x[], int y[], int z[], int N) {
-	int* p = x, * q = y + N - 1, *r = z;
-
-	for (;p < x + N;p++, q--, r++)
-		*r = *p + *q;
+void addArray(int a[], int b[], int c[], int N) {
+	for (int i = 0; i < N; i++)
+		*(c + i) = *(a + i) + *(b + N - i - 1);
 }

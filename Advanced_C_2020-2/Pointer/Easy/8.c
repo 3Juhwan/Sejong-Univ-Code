@@ -1,26 +1,26 @@
 #pragma warning (disable:4996)
 #include <stdio.h>
 
-void swap(int* x, int* y);
+void swap(int* p, int* q);
 
 int main() {
-	int  N = 0, arr[50] = { 0, }, a = 0, b = 0;
-	int* p = NULL;
+	int N = 0, a = 0, b = 0, arr[50] = { 0, };
 
 	scanf("%d", &N);
-	for (p = arr; p < arr + N;p++) scanf("%d", p);
+	for (int i = 0; i < N; i++)
+		scanf("%d", &arr[i]);
 	scanf("%d %d", &a, &b);
 
-	swap(arr + a, arr + b);
+	swap(&arr[a], &arr[b]);
 
-	for (p = arr; p < arr + N;p++)
-		printf(" %d", *p);
+	for (int i = 0; i < N; i++)
+		printf(" %d", arr[i]);
 
 	return 0;
 }
 
-void swap(int* x, int* y) {
-	int tmp = *x;
-	*x = *y;
-	*y = tmp;
+void swap(int* p, int* q) {
+	int tmp = *p;
+	*p = *q;
+	*q = tmp;
 }

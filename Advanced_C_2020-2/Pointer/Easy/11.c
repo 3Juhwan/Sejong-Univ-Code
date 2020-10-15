@@ -4,21 +4,21 @@
 void strcopy(char a[], char b[]);
 
 int main() {
-	char a[6], b[6];
+	char arr1[6] = { '\0' }, arr2[6] = { '\0' };
 	char* p = NULL;
 
-	for (p = b; p < b + 6; p++)
+	for (p = arr2; p < arr2 + 6; p++)
 		scanf("%c", p);
 
-	strcopy(a, b);
+	strcopy(arr1, arr2);
 
-	for (p = a; p < a + 6; p++)
+	for (p = arr1; p < arr1 + 6; p++)
 		printf("%c", *p);
 
-	return;
+	return 0;
 }
 
 void strcopy(char a[], char b[]) {
-	for (int i = 0;i < 6;i++)
-		*(a + i) = *(b + i);
+	for (char* p = b, *q = a; p < b + 6;p++, q++)
+		*q = *p;
 }

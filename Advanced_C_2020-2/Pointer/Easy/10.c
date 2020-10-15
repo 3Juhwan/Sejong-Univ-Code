@@ -4,22 +4,26 @@
 void gcdlcm(int x, int y, int* p, int* q);
 
 int main() {
-	int a = 0, b = 0;
+	int x = 0, y = 0, max = 0, min = 0;
 
-	scanf("%d %d", &a, &b);
+	scanf("%d %d", &x, &y);
 
-	gcdlcm(a, b, &a, &b);
+	gcdlcm(x, y, &max, &min);
 
-	printf("%d %d", a, b);
+	printf("%d %d", max, min);
 
 	return 0;
 }
 
 void gcdlcm(int x, int y, int* p, int* q) {
-	int  i = x > y ? y : x;				// x와 y 중에 더 작은 값으로 i를 초기화한다
+	int flag = x > y ? y : x;
 
-	for (;x % i != 0 || y % i != 0;i--)
-		;
-	*p = i;
-	*q = x * y / i;
+	while (flag > 0)
+	{
+		if (x % flag == 0 && y % flag == 0)
+			break;
+		flag--;
+	}
+	*p = flag;
+	*q = x * y / flag;
 }

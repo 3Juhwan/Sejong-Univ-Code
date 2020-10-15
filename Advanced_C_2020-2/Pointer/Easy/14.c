@@ -4,11 +4,10 @@
 int add_to_k(int* p, int* q);
 
 int main() {
-	int N = 0, sum = 0, *p = NULL;
-	int arr[100] = { 0, };
+	int N = 0,sum = 0, arr[100] = { 0, };
+	int* p = NULL;
 
 	scanf("%d", &N);
-
 	for (p = arr; p < arr + N; p++)
 		scanf("%d", p);
 
@@ -22,6 +21,10 @@ int main() {
 
 int add_to_k(int* p, int* q) {
 	int sum = 0;
-	for (;p <= q;p++) sum += *p;
+	while (p <= q)
+	{
+		sum += *p;
+		p++;
+	}
 	return sum;
 }
