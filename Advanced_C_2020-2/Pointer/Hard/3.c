@@ -2,38 +2,39 @@
 #include <stdio.h>
 
 int main() {
-	int N = 0, sum = 0;
-	char str[100], *p = NULL, *q = NULL;
+	int N = 0, sum = 0, tmp = 0, size = 0;
+	char arr[100] = "", narr[100] = "", * p = NULL, * q = narr;
 
 	scanf("%d", &N);
 	getchar();
-
-	for (p = str;p < str + N;p++)
-	{
+	for (p = arr; p < arr + N;p++)
 		scanf("%c", p);
-	}
 
-	for (p = str;p < str + N;p++)
+	p = arr;
+	while (p < arr + N)
 	{
-		// p 주소의 값이 문자일 때
-		if ((*p >= 'A' && *p <= 'Z') || (*p >= 'a' && *p <= 'z'))
+		if (*p >= 'A' && *p <= 'Z' || *p >= 'a' && *p <= 'z')
 		{
-			printf("%c", *p);
+			*q = *p;
+			q++;
+			size++;
 		}
-
-		// p 주소의 값이 숫자일 때
-		else
+		else if (*p >= '0' && *p <= '9')
 		{
-			int tmp = 0;
-			for (q = p; *q >= '0' && *q <= '9';q++, p++)
+			while (*p >= '0' && *p <= '9')
 			{
-				tmp = tmp * 10 + (*q - '0');
+				tmp = tmp * 10 + (*p - '0');
+				p++;
 			}
 			sum += tmp;
+			tmp = 0;
 			p--;
 		}
+		p++;
 	}
 
+	for (p = narr; p < narr + size;p++)
+		printf("%c", *p);
 	printf("\n%d", sum);
 
 	return 0;
