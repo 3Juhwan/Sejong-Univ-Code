@@ -5,7 +5,6 @@
 
 int main() {
 	char str1[81] = "", str2[11] = "";
-	char* p = str1, * q = str2;
 	int len1 = 0, len2 = 0, cnt = 0, is = 0;
 
 	scanf("%s", str1);
