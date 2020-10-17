@@ -1,16 +1,15 @@
 #pragma warning (disable:4996)
 #include <stdio.h>
 
-void ABC(int* S, int k);
+void ABC(int arr[], int N);
 
 int main() {
-	int arr[10] = { 0, };
-	int* p = NULL;
+	int arr[10] = { 0, }, *p = arr;
 
-	for (p = arr; p < arr + 10; p++)
+	for(p = arr; p < arr + 10; p++)
 		scanf("%d", p);
 
-	for (p = arr; p < arr + 10;p++)
+	for (p = arr; p < arr + 9;p++)
 		ABC(p, arr + 10 - p);
 
 	for (p = arr; p < arr + 10; p++)
@@ -19,12 +18,15 @@ int main() {
 	return 0;
 }
 
-void ABC(int* S, int k) {
-	int* max = S, tmp = *S;
-	for (int* p = S; p < S + k;p++)
-		if (*max < *p)
-			max = p;
-	tmp = *S;
-	*S = *max;
-	*max = tmp;
+void ABC(int arr[], int N) {
+	int tmp = 0;
+	for (int* p = arr + 1; p < arr + N; p++)
+	{
+		if (*arr < *p)
+		{
+			tmp = *p;
+			*p = *arr;
+			*arr = tmp;
+		}
+	}
 }
