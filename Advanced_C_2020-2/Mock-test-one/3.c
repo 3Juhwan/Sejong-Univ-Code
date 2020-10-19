@@ -15,8 +15,8 @@ int main() {
 
 	for (int i = 0, j = 0; i < len - 1 + j; i++)
 	{
-		cvt1 = str[i];
-		cvt2 = str[i + 1];
+		cvt1 = Convertor(str[i]);
+		cvt2 = Convertor(str[i + 1]);
 		if (cvt1 % 2 == 1 && cvt2 % 2 == 1)
 		{
 			StringAdd(str, smb1, i);

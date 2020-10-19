@@ -10,42 +10,37 @@ struct st {
 };
 
 int main() {
-	struct st Student[100] = { '\0' };
-	char discard[20] = "";
-	int N = 0, size = 0;
+	struct st Student[100] = { 0, }, * p = NULL;
+	char tmp[20] = "";
+	int N = 0, i = 0;
 
 	scanf("%d", &N);
 	getchar();
 
-	for (int i = 0; i < N; i++)
+	for (p = Student; p < Student + N; p++)
 	{
-		scanf("%s", Student[i].name);
-		while (size < 6)
+		i = 0;
+		scanf("%s", p->name);
+		getchar();
+
+		scanf("%s", tmp);
+		while (strcmp(tmp, "0"))
 		{
-			if (size < 5) {
-				scanf("%s", Student[i].book[size]);
-				if (strcmp(Student[i].book[size], "0") == 0)
-					break;
-				
-				scanf("%d", &Student[i].score[size]);
-				if (Student[i].score[size] >= 50)
-					Student[i].pcnt++;
+			strcpy(p->book[i], tmp);
+			scanf("%d", &p->score[i]);
+			p->cnt++;
 
-				size++;
-			}
-			else {
-				scanf("%s", discard);
-				size++;
-			}
+			if (p->score[i] >= 50)
+				p->pcnt++;
+			i++;
+
+			scanf("%s", tmp);
 		}
-		if (size >= 6) size--;
-
-		Student[i].cnt = size;
-		size = 0;
 	}
 
-	for (int i = 0; i < N; i++)
-		printf("%s %d%%\n", Student[i].name, (Student[i].pcnt * 20));
+	for (p = Student; p < Student + N; p++)
+		printf("%s %d%%\n", p->name, p->pcnt * 20);
+
 
 	return 0;
 }
