@@ -1,0 +1,86 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+struct Date {
+	int year;
+	int month;
+	int day;
+	int hour;
+	int minute;
+};
+
+struct Park {
+	int carNum;
+	int stNum;
+	struct Date D1;
+	struct Date D2;
+};
+
+int main() {
+	struct Park Car[100] = { 0 };
+	struct Park* noCar[100] = { NULL }, * tmp = NULL;
+	int N = 0, ncnt = 0, is = 0;
+
+	scanf("%d", &N);
+
+	for (int i = 0;i < N;i++)
+		scanf("%d %d %d-%d-%d %d:%d %d-%d-%d %d:%d", &Car[i].carNum, &Car[i].stNum, &Car[i].D1.year, &Car[i].D1.month, &Car[i].D1.day, &Car[i].D1.hour, &Car[i].D1.minute, &Car[i].D2.year, &Car[i].D2.month, &Car[i].D2.day, &Car[i].D2.hour, &Car[i].D2.minute);
+
+	for (int i = 0;i < N - 1;i++)
+	{
+		is = 0;
+
+		for (int j = 0; j < ncnt;j++)
+		{
+			if (Car[i].stNum == noCar[j]->stNum) {
+				is = 1;
+				break;
+			}
+		}
+
+		if (is)	continue;
+
+		for (int j = i + 1;j < N;j++)
+		{
+			if (Car[i].stNum == Car[j].stNum)
+			{
+				noCar[ncnt] = &Car[i];
+				ncnt++;
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < ncnt - 1;i++)
+	{
+		for (int j = i + 1; j < ncnt;j++)
+		{
+			if (noCar[i]->stNum > noCar[j]->stNum)
+			{
+				tmp = noCar[i];
+				noCar[i] = noCar[j];
+				noCar[j] = tmp;
+			}
+		}
+	}
+
+	for (int i = 0; i < ncnt;i++)
+		printf("%d\n", noCar[i]->stNum);
+
+
+
+	return 0;
+}
+
+/*
+input data set
+
+5321 160123 2017-09-03 07:00 2017-09-03 15:12
+1234 151237 2017-09-03 08:00 2017-09-03 13:42
+8623 158762 2017-09-03 06:00 2017-09-03 23:59
+9752 171893 2017-09-03 13:55 2017-09-03 15:22
+5715 151237 2017-09-03 15:43 2017-09-03 17:31
+7473 160123 2017-09-03 16:41 2017-09-03 19:00
+6309 174099 2017-09-03 15:33 2017-09-03 14:12
+
+*/

@@ -1,0 +1,113 @@
+#pragma warning (disable:4996)
+#include <stdio.h>
+
+struct Date {
+	int year;
+	int month;
+	int day;
+	int hour;
+	int minute;
+};
+
+struct Park {
+	int carNum;
+	int stNum;
+	struct Date D1;
+	struct Date D2;
+};
+
+int main() {
+	struct Park Car[100] = { 0 };
+	struct Park* noCar[100] = { NULL }, * tmp = NULL;
+	int N = 0, tN = 0, ncnt = 0, is = 0, order = 0, flag = 0, total = 0, price = 0;
+
+	scanf("%d", &N);
+
+	for (int i = 0;i < N;i++)
+		scanf("%d %d %d-%d-%d %d:%d %d-%d-%d %d:%d", &Car[i].carNum, &Car[i].stNum, &Car[i].D1.year, &Car[i].D1.month, &Car[i].D1.day, &Car[i].D1.hour, &Car[i].D1.minute, &Car[i].D2.year, &Car[i].D2.month, &Car[i].D2.day, &Car[i].D2.hour, &Car[i].D2.minute);
+
+	for (int i = 0;i < N - 1;i++)
+	{
+		is = 0;
+
+		for (int j = 0; j < ncnt;j++)
+		{
+			if (Car[i].stNum == noCar[j]->stNum) {
+				is = 1;
+				break;
+			}
+		}
+
+		if (is)	continue;
+
+		for (int j = i + 1;j < N;j++)
+		{
+			if (Car[i].stNum == Car[j].stNum)
+			{
+				noCar[ncnt] = &Car[i];
+				ncnt++;
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < ncnt - 1;i++)
+	{
+		for (int j = i + 1; j < ncnt;j++)
+		{
+			if (noCar[i]->stNum > noCar[j]->stNum)
+			{
+				tmp = noCar[i];
+				noCar[i] = noCar[j];
+				noCar[j] = tmp;
+			}
+		}
+	}
+
+	scanf("%d", &N);
+
+	for (int i = 0;i < N;i++)
+	{
+		// 차량 번호 입력
+		scanf("%d", &tN);
+
+		while (tN != Car[order].carNum)
+			order++;
+
+		// 부정이용자인가? 
+		for (int j = 0; j < ncnt; j++)
+		{
+			if (Car[order].stNum == noCar[j]->stNum)
+			{
+				flag = 1;
+				break;
+			}
+		}
+
+		// 요금 
+		if (flag)
+			printf("100000\n");
+		else
+		{
+			total = Car[order].D2.hour * 60 + Car[order].D2.minute - (Car[order].D1.hour * 60 + Car[order].D1.minute);
+			
+			if (total <= 60)
+				printf("3000\n");
+			else if (total < 321)
+			{
+				price = 3000 + ((total - 60) / 10) * 1000;
+				if (total % 10 > 0)
+					price += 1000;
+				printf("%d\n", price);
+			}
+			else
+				printf("30000\n");
+		}
+
+		order = 0;
+		total = 0;
+		flag = 0;
+	}
+
+	return 0;
+}
