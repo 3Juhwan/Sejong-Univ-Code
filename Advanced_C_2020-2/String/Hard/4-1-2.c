@@ -8,7 +8,7 @@ int main() {
 	double pnum[10] = { 0.0 };
 	int len = 0, size = 0;
 
-	gets_s(arr, 101);
+	gets(arr);
 	len = strlen(arr);
 
 	while (*p)

@@ -8,10 +8,10 @@ void del(char arr[]);
 int main() {
 	char arr[100] = "";
 	char* p = arr, *q = arr;
-	int len = 0, cnt = 0, tmp = 0, size = 0;
+	int len = 0, size = 0;
 	double num[10] = { 0.0 };
 
-	gets_s(arr, 100);
+	gets(arr);
 
 	del(arr);
 

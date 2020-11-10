@@ -4,9 +4,9 @@
 #include <stdlib.h>
 
 int main() {
-	char arr[100] = "", * p = arr, * q = arr, tmp = '\0';
-	char* tarr[51] = { NULL }, * ttmp = NULL;
-	int size = 0, cmp = 0;
+	char arr[100] = "", * p = arr, * q = arr;
+	char* tarr[51] = { NULL };
+	int size = 0;
 
 	gets_s(arr, 100);
 
@@ -28,11 +28,8 @@ int main() {
 		printf("%s\n", tarr[i]);
 
 	for (int i = 0; i < size;i++)
-	{
-		cmp = strcmp(tarr[0], tarr[i]);
-		if (cmp > 0)
+		if(strcmp(tarr[0], tarr[i]) > 0)
 			tarr[0] = tarr[i];
-	}
 
 	printf("%s\n", tarr[0]);
 

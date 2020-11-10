@@ -7,9 +7,9 @@ void del(char arr[]);
 
 int main() {
 	char arr[100] = "";
-	char* p = arr, *q = arr;
-	int len = 0, cnt = 0, tmp = 0, size = 0;
-	int smb[10] = {0,};
+	char* p = arr, * q = arr;
+	int size = 0;
+	int smb[10] = { 0, };
 	double num[10] = { 0.0 };
 
 	gets_s(arr, 100);
@@ -37,12 +37,13 @@ int main() {
 		p++;
 	}
 	num[size] = atof(q);
+	size++;
 
-	for (int i = 0; i <= size;i++)
+	for (int i = 0; i < size;i++)
 		if (smb[i] == 1)
 			num[i] *= -1;
 
-	for (int i = 0; i <= size; i++)
+	for (int i = 0; i < size; i++)
 		printf(" %.lf", num[i]);
 
 	return 0;

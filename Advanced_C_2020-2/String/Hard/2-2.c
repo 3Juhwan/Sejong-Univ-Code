@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 int main() {
-	char arr[100] = "", * p = arr, * q = arr, tmp = '\0';
+	char arr[100] = "", * p = arr, * q = arr;
 	char* tarr[51] = { NULL }, * ttmp = NULL;
 	int size = 0;
 
