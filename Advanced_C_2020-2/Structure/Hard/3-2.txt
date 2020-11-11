@@ -1,86 +1,68 @@
 #pragma warning (disable:4996)
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-struct hotel_info {
+typedef struct {
 	char name[31];
-	int rank;
+	int grade;
 	double reputation;
 	double distance;
 	char meal;
-};
+}hotel_info;
 
-int in_hotel_info(struct hotel_info* p);
-void out_hotel_info(struct hotel_info* p, int N, int G, double D);
+int in_hotel_info(hotel_info* p);
+void out_hotel_info(hotel_info* p, int N, int G, double D);
 
 int main() {
-	struct hotel_info Info[100] = { '\0' };
-	int N = 0, G = 0;
-	double D = 0;
+	hotel_info H[100] = { "" };
+	int size = 0, G = 0;
+	double D = 0.0;
 
-	N = in_hotel_info(Info);
+	size = in_hotel_info(H);
 
 	scanf("%d %lf", &G, &D);
 
-	out_hotel_info(Info, N, G, D);
+	out_hotel_info(H, size, G, D);
 
 	return 0;
 }
 
-int in_hotel_info(struct hotel_info* p) {
-	int cnt = 0, tmp = 0;
-	while (1)
+int in_hotel_info(hotel_info* p) {
+	hotel_info* q = p;
+	int size = 0;
+
+	scanf("%s", q->name);
+	while (strcmp(q->name, "0") != 0)
 	{
-		scanf("%s", p->name);
+		scanf("%d %lf %lf %c", &q->grade, &q->reputation, &q->distance, &q->meal);
+		getchar();
+		size++;
+		q++;
 
-		tmp = strcmp(p->name, "0");
-		if (tmp == 0)
-			break;
-
-		scanf("%d %lf %lf %c", &p->rank, &p->reputation, &p->distance, &p->meal);
-		p++;
-		cnt++;
+		scanf("%s", q->name);
 	}
-	return cnt;
+
+	return size;
 }
 
-void out_hotel_info(struct hotel_info* p, int N, int G, double D) {
-	struct hotel_info* i = NULL, * chosen[100] = { NULL }, * stmp = NULL, ** psh = chosen, ** pch = NULL;
-	int cmp = 0, idx = 1, size = 0;
+void out_hotel_info(hotel_info* p, int N, int G, double D) {
+	hotel_info tmp = { "" };
 
-	for (i = p; i < p + N; i++)
+	for (hotel_info* q = p; q < p + N - 1; q++)
 	{
-		if (i->rank >= G && i->distance <= D)
+		for (hotel_info* r = q + 1; r < p + N; r++)
 		{
-			*psh = i;
-			psh++;
-			size++;
-		}
-	}
-
-	for (psh = chosen; psh < chosen + size - 1; psh++)
-	{
-		for (pch = psh + 1; pch < chosen + size; pch++)
-		{
-			if ((*psh)->reputation < (*pch)->reputation)
+			if (r->reputation > q->reputation || (r->reputation == q->reputation && strcmp(r->name, q->name) < 0))
 			{
-				stmp = *psh;
-				*psh = *pch;
-				*pch = stmp;
-			}
-			else if ((*psh)->reputation == (*pch)->reputation)
-			{
-				cmp = strcmp((*psh)->name, (*pch)->name);
-				if (cmp > 0)
-				{
-					stmp = *psh;
-					*psh = *pch;
-					*pch = stmp;
-				}
+				tmp = *r;
+				*r = *q;
+				*q = tmp;
 			}
 		}
 	}
 
-	for (psh = chosen; psh < chosen + size; psh++)
-		printf("%s %d %.1lf %.1lf %c\n", (*psh)->name, (*psh)->rank, (*psh)->reputation, (*psh)->distance, (*psh)->meal);
+	for (hotel_info* q = p; q < p + N; q++)
+		if (q->grade >= G && q->distance <= D)
+			printf("%s %d %.1lf %.1lf %c\n", q->name, q->grade, q->reputation, q->distance, q->meal);
 }

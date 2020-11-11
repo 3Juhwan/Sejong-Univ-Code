@@ -1,18 +1,18 @@
 #pragma warning (disable:4996)
 #include <stdio.h>
 
-struct _bank {
+typedef struct{
 	int id;
 	int arrival_time;
 	int service_time;
 	int waiting_time;
-};
+}_bank;
 
-void waitingtime(struct _bank guest[], int N);
-double avgtime(struct _bank guest[], int N);
+void waitingtime(_bank guest[], int N);
+double avgtime(_bank guest[], int N);
 
 int main() {
-	struct _bank Customer[100] = { 0, };
+	_bank Customer[100] = { 0, };
 	int N = 0;
 	double avg = 0;
 
@@ -29,7 +29,7 @@ int main() {
 	return 0;
 }
 
-void waitingtime(struct _bank guest[], int N) {
+void waitingtime(_bank guest[], int N) {
 	int total = 0;
 
 	for (int i = 0; i < N; i++)
@@ -42,7 +42,7 @@ void waitingtime(struct _bank guest[], int N) {
 	}
 }
 
-double avgtime(struct _bank guest[], int N) {
+double avgtime(_bank guest[], int N) {
 	double avg = 0.0;
 
 	for (int i = 0; i < N; i++)

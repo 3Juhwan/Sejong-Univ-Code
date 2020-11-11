@@ -1,86 +1,104 @@
 #pragma warning (disable:4996)
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-struct Date {
-	int year;
-	int month;
-	int day;
-	int hour;
-	int minute;
-};
+typedef struct {
+	char carNum[5];
+	char stNum[7];
+	char Sdate[11];
+	char Stime[6];
+	char Edate[11];
+	char Etime[6];
+	int deny;
+}STUDENT;
 
-struct Park {
-	int carNum;
-	int stNum;
-	struct Date D1;
-	struct Date D2;
-};
+void input(STUDENT p[], int N);
+void sorting(STUDENT p[], int N);
+int search_deny(STUDENT p[], int N);
+void print_denied(STUDENT p[], int N, int cnt);
 
 int main() {
-	struct Park Car[100] = { 0 };
-	struct Park* noCar[100] = { NULL }, * tmp = NULL;
-	int N = 0, ncnt = 0, is = 0;
+	STUDENT* p = NULL, tmp = { "" };
+	int N = 0, cnt = 0, n = 1;
 
 	scanf("%d", &N);
+	getchar();
 
-	for (int i = 0;i < N;i++)
-		scanf("%d %d %d-%d-%d %d:%d %d-%d-%d %d:%d", &Car[i].carNum, &Car[i].stNum, &Car[i].D1.year, &Car[i].D1.month, &Car[i].D1.day, &Car[i].D1.hour, &Car[i].D1.minute, &Car[i].D2.year, &Car[i].D2.month, &Car[i].D2.day, &Car[i].D2.hour, &Car[i].D2.minute);
+	p = (STUDENT*)malloc(N * sizeof(STUDENT));
+	if (p == NULL)
+		return -1;
 
-	for (int i = 0;i < N - 1;i++)
-	{
-		is = 0;
+	input(p, N);
+	sorting(p, N);
+	cnt = search_deny(p, N);
+	print_denied(p, N, cnt);	
 
-		for (int j = 0; j < ncnt;j++)
-		{
-			if (Car[i].stNum == noCar[j]->stNum) {
-				is = 1;
-				break;
-			}
-		}
-
-		if (is)	continue;
-
-		for (int j = i + 1;j < N;j++)
-		{
-			if (Car[i].stNum == Car[j].stNum)
-			{
-				noCar[ncnt] = &Car[i];
-				ncnt++;
-				break;
-			}
-		}
-	}
-
-	for (int i = 0; i < ncnt - 1;i++)
-	{
-		for (int j = i + 1; j < ncnt;j++)
-		{
-			if (noCar[i]->stNum > noCar[j]->stNum)
-			{
-				tmp = noCar[i];
-				noCar[i] = noCar[j];
-				noCar[j] = tmp;
-			}
-		}
-	}
-
-	for (int i = 0; i < ncnt;i++)
-		printf("%d\n", noCar[i]->stNum);
-
-
+	free(p);
 
 	return 0;
 }
 
-/*
-input data set
+void input(STUDENT p[], int N) {
+	for (int i = 0; i < N;i++)
+	{
+		scanf("%s %s %s %s %s %s", p[i].carNum, p[i].stNum, p[i].Sdate, p[i].Stime, p[i].Edate, p[i].Etime);
+		getchar();
 
-5321 160123 2017-09-03 07:00 2017-09-03 15:12
-1234 151237 2017-09-03 08:00 2017-09-03 13:42
-8623 158762 2017-09-03 06:00 2017-09-03 23:59
-9752 171893 2017-09-03 13:55 2017-09-03 15:22
-5715 151237 2017-09-03 15:43 2017-09-03 17:31
-7473 160123 2017-09-03 16:41 2017-09-03 19:00
-6309 174099 2017-09-03 15:33 2017-09-03 14:12
+		p[i].deny = 0;
+	}
+}
 
-*/
+void sorting(STUDENT p[], int N) {
+	STUDENT tmp;
+	for (int i = 0;i < N - 1;i++)
+	{
+		for (int j = 0; j < N - i - 1; j++)
+		{
+			if (strcmp(p[j].stNum, p[j + 1].stNum) > 0)
+			{
+				tmp = p[j];
+				p[j] = p[j + 1];
+				p[j + 1] = tmp;
+			}
+		}
+	}
+}
+
+int search_deny(STUDENT p[], int N) {
+	int cnt = 1;
+
+	for (int i = 0; i < N - 1; i++)
+	{
+		if (strcmp(p[i].stNum, p[i + 1].stNum) == 0)
+		{
+			if (p[i].deny)
+				p[i + 1].deny = p[i].deny;
+			else
+			{
+				p[i].deny = cnt;
+				p[i + 1].deny = cnt;
+				cnt++;
+			}
+		}
+	}
+	
+	return cnt;
+}
+
+void print_denied(STUDENT p[], int N, int cnt) {
+	int n = 1;
+
+	while (n < cnt)
+	{
+		for (int j = 0; j < N;j++)
+		{
+			if (p[j].deny == n)
+			{
+				printf("%s\n", p[j].stNum);
+				n++;
+				break;
+			}
+		}
+	}
+}
