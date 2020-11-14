@@ -1,29 +1,36 @@
 #pragma warning (disable:4996)
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
 int main() {
-	int N = 0, cnt = 0;
-	char* p = NULL;
+	int N = 0, cnt = 0, t_cnt = 0;
+	char* p = NULL, * cat = "cat";
 
 	scanf("%d", &N);
+	getchar();
 
-	p = (char*)malloc((N + 1) * sizeof(char));
-
+	p = (char*)malloc(N * sizeof(char));
 	if (p == NULL)
 		return -1;
 
-	scanf("%s", p);
-	getchar();
+	for (int i = 0; i < N;i++)
+		scanf("%c", &p[i]);
 
-	for (int i = 0;i < N - 2; i++)
-		if (strncmp(&p[i], "cat", 3) == 0)
+	for (int i = 0; i < N - 2;i++)
+	{
+		for (int j = 0; j < 3; j++)
+			if (p[i + j] == cat[j])
+				t_cnt++;
+		if (t_cnt == 3)
 			cnt++;
+		t_cnt = 0;
+	}
 
-	printf("%d", cnt);
+	printf("%d\n", cnt);
 
-	free(p);
+	if (p != NULL)
+		free(p);
 
 	return 0;
 }

@@ -10,14 +10,13 @@ typedef struct {
 
 int main() {
 	int N = 0, len = 0, tcnt = 0;
-	char temp[101] = "";
+	char temp[101] = "", ch = '\0';
 	st* S = NULL, tmp = { "",0 };
 
 	scanf("%d", &N);
 	getchar();
 
 	S = (st*)malloc(N * sizeof(st));
-
 	if (S == NULL)
 		return -1;
 
@@ -36,9 +35,11 @@ int main() {
 		strcpy(S[i].str,temp);
 
 		for (int j = 0;j < len;j++)
-			if (S[i].str[j] != 'A' && S[i].str[j] != 'E' && S[i].str[j] != 'I' && S[i].str[j] != 'O' && S[i].str[j] != 'U' && S[i].str[j] != 'a' && S[i].str[j] != 'e' && S[i].str[j] != 'i' && S[i].str[j] != 'o' && S[i].str[j] != 'u')
+		{
+			ch = S[i].str[j];
+			if (ch != 'a' && ch != 'A' && ch != 'e' && ch != 'E' && ch != 'i' && ch != 'I' && ch != 'o' && ch != 'O' && ch != 'u' && ch != 'U')
 				tcnt++;
-
+		}
 		S[i].cnt = tcnt;
 	}
 
@@ -59,8 +60,10 @@ int main() {
 		printf("%s\n", S[i].str);
 
 	for (int i = 0;i < N;i++)
-		free(S[i].str);
-
+		if (S[i].str != NULL)
+			free(S[i].str);
+	
+	if (S != NULL)
 	free(S);
 
 	return 0;
