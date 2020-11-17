@@ -138,12 +138,8 @@ int main() {
 	{
 		for (int j = 0; j < S[i].numSubject;j++)
 			free(S[i].psub[j].name);
-	}
-
-	for (int i = 0; i < n;i++)
-	{
-		free(S[i].name);
 		free(S[i].psub);
+		free(S[i].name);
 	}
 
 	free(S);

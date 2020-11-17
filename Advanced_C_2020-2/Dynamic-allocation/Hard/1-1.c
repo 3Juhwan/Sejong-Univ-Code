@@ -32,7 +32,7 @@ int main() {
 		if (S[i].str == NULL)
 			return -1;
 
-		strcpy(S[i].str,temp);
+		strcpy(S[i].str, temp);
 
 		for (int j = 0;j < len;j++)
 		{
@@ -62,9 +62,9 @@ int main() {
 	for (int i = 0;i < N;i++)
 		if (S[i].str != NULL)
 			free(S[i].str);
-	
+
 	if (S != NULL)
-	free(S);
+		free(S);
 
 	return 0;
 }
